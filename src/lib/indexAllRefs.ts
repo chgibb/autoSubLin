@@ -11,7 +11,7 @@ export class IndexAllRefsHisat2 extends Task<undefined,undefined>
     {
         super(undefined,undefined);
         this.name = "Index Hisat2 all refs fasta";
-        this.dependsOn = new RawDir();
+        this.dependsOn = [new RawDir()];
     }
 
     public artifacts() : Array<string>

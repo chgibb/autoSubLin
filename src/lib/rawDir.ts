@@ -11,7 +11,7 @@ export class RawDir extends Task<undefined,undefined>
     {
         super(undefined,undefined);
         this.name = "Make out/raw/";
-        this.dependsOn = new OutDir();
+        this.dependsOn = [new OutDir()];
     }
 
     public artifacts() : Array<string>

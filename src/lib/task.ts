@@ -2,12 +2,12 @@ import * as fs from "fs";
 
 export abstract class Task<I,M>
 {
-    public dependsOn? : Task<any,any>;
+    public dependsOn? : Array<Task<any,any>>;
     public abstract name : string;
     public inputs : I;
     public modifiers : M;
 
-    public constructor(inputs : I, modifiers : M,dependsOn? : Task<any,any>)
+    public constructor(inputs : I, modifiers : M,dependsOn? : Array<Task<any,any>>)
     {
         this.dependsOn = dependsOn;
         this.inputs = inputs;
@@ -21,7 +21,12 @@ export abstract class Task<I,M>
     {
         return new Promise<boolean>(async (resolve : (value : boolean) => void,reject : (reason : string) => void) => {
             if(this.dependsOn)
-                await this.dependsOn.execute();
+            {
+                for(let i = 0; i != this.dependsOn.length; ++i)
+                {
+                    await this.dependsOn[i].execute();
+                }
+            }
             
             if(missingArtifacts(this))
             {

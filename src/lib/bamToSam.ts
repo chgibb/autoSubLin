@@ -11,7 +11,7 @@ export class BamToSam extends Task<string,string>
     {
         super(inputs,modifiers);
         this.name = `Convert Bam to Sam ${this.inputs} -> ${this.modifiers}`;
-        this.dependsOn = new IndexAllRefsHisat2();
+        this.dependsOn = [new IndexAllRefsHisat2()];
     }
     
     public artifacts() : Array<string>
