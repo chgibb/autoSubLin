@@ -3,15 +3,15 @@ import * as fs from "fs"
 import {Task} from "./task";
 import {OutDir} from "./outDir"
 
-export class RawDir extends Task
+export class RawDir extends Task<undefined,undefined>
 {
     public name : string;
     
-    public constructor(inputs : Array<string>,modifiers : Array<string>)
+    public constructor()
     {
-        super(inputs,modifiers);
+        super(undefined,undefined);
         this.name = "Make out/raw/";
-        this.dependsOn = new OutDir([],[]);
+        this.dependsOn = new OutDir();
     }
 
     public artifacts() : Array<string>

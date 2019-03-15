@@ -3,15 +3,15 @@ import * as cp from "child_process";
 import {Task} from "./task";
 import {RawDir} from "./rawDir";
 
-export class IndexAllRefsHisat2 extends Task
+export class IndexAllRefsHisat2 extends Task<undefined,undefined>
 {
     public name : string;
-    
-    public constructor(inputs : Array<string>,modifiers : Array<string>)
+
+    public constructor()
     {
-        super(inputs,modifiers);
+        super(undefined,undefined);
         this.name = "Index Hisat2 all refs fasta";
-        this.dependsOn = new RawDir([],[]);
+        this.dependsOn = new RawDir();
     }
 
     public artifacts() : Array<string>

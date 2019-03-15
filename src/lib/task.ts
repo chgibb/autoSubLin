@@ -1,13 +1,13 @@
 import * as fs from "fs";
 
-export abstract class Task
+export abstract class Task<I,M>
 {
-    public dependsOn? : Task;
+    public dependsOn? : Task<any,any>;
     public abstract name : string;
-    public inputs : Array<string>;
-    public modifiers : Array<string>;
-    
-    public constructor(inputs : Array<string>, modifiers : Array<string>,dependsOn? : Task)
+    public inputs : I;
+    public modifiers : M;
+
+    public constructor(inputs : I, modifiers : M,dependsOn? : Task<any,any>)
     {
         this.dependsOn = dependsOn;
         this.inputs = inputs;
@@ -33,7 +33,7 @@ export abstract class Task
     }
 }
 
-export function missingArtifacts(task : Task) : boolean
+export function missingArtifacts(task : Task<any,any>) : boolean
 {
     let artifacts = task.artifacts();
     for(let i = 0; i != artifacts.length; ++i)

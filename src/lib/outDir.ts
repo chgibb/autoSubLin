@@ -2,13 +2,13 @@ import * as fs from "fs"
 
 import {Task} from "./task";
 
-export class OutDir extends Task
+export class OutDir extends Task<undefined,undefined>
 {
     public name : string;
     
-    public constructor(inputs : Array<string>,modifiers : Array<string>)
+    public constructor()
     {
-        super(inputs,modifiers);
+        super(undefined,undefined);
         this.name = "Make out/";
     }
     
