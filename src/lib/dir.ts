@@ -1,24 +1,22 @@
 import * as fs from "fs"
 
 import {Task} from "./task";
-import {OutDir} from "./outDir"
 
-export class RawDir extends Task<undefined,undefined>
+export class Dir extends Task<string,undefined>
 {
     public name : string;
     
-    public constructor()
+    public constructor(input : string)
     {
-        super(undefined,undefined);
-        this.name = "Make out/raw/";
-        this.dependsOn = [new OutDir()];
+        super(input,undefined);
+        this.name = `Make ${input}/`;
     }
 
     public artifacts() : Array<string>
     {
         let res = new Array<string>();
 
-        res.push("out/raw");
+        res.push(this.input);
 
         return res;
     }
@@ -26,7 +24,7 @@ export class RawDir extends Task<undefined,undefined>
     public run() : Promise<boolean>
     {
         return new Promise<boolean>((resolve) => {
-            fs.mkdirSync("out/raw");
+            fs.mkdirSync(this.input);
             resolve(true);
         })
     }

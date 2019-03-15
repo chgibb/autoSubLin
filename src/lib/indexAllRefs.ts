@@ -1,7 +1,7 @@
 import * as cp from "child_process";
 
 import {Task} from "./task";
-import {RawDir} from "./rawDir";
+import {DataDir} from "./dataDir";
 
 export class IndexAllRefsHisat2 extends Task<undefined,undefined>
 {
@@ -11,7 +11,7 @@ export class IndexAllRefsHisat2 extends Task<undefined,undefined>
     {
         super(undefined,undefined);
         this.name = "Index Hisat2 all refs fasta";
-        this.dependsOn = [new RawDir()];
+        this.dependsOn = [new DataDir()];
     }
 
     public artifacts() : Array<string>

@@ -4,13 +4,13 @@ export abstract class Task<I,M>
 {
     public dependsOn? : Array<Task<any,any>>;
     public abstract name : string;
-    public inputs : I;
+    public input : I;
     public modifiers : M;
 
     public constructor(inputs : I, modifiers : M,dependsOn? : Array<Task<any,any>>)
     {
         this.dependsOn = dependsOn;
-        this.inputs = inputs;
+        this.input = inputs;
         this.modifiers = modifiers;
     }
 
@@ -41,6 +41,9 @@ export abstract class Task<I,M>
 export function missingArtifacts(task : Task<any,any>) : boolean
 {
     let artifacts = task.artifacts();
+    if(artifacts.length == 0)
+        return true;
+        
     for(let i = 0; i != artifacts.length; ++i)
     {
         if(!fs.existsSync(artifacts[i]))
