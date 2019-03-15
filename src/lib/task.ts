@@ -30,7 +30,7 @@ export abstract class Task<I,M>
             
             if(missingArtifacts(this))
             {
-                if(this.artifacts.length != 0)
+                if(this.artifacts().length != 0)
                     console.log(this.name);
                 await this.run();
             }
