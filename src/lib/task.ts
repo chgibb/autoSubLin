@@ -30,7 +30,8 @@ export abstract class Task<I,M>
             
             if(missingArtifacts(this))
             {
-                console.log(this.name);
+                if(this.artifacts.length != 0)
+                    console.log(this.name);
                 await this.run();
             }
             resolve(missingArtifacts(this));
@@ -43,7 +44,7 @@ export function missingArtifacts(task : Task<any,any>) : boolean
     let artifacts = task.artifacts();
     if(artifacts.length == 0)
         return true;
-        
+
     for(let i = 0; i != artifacts.length; ++i)
     {
         if(!fs.existsSync(artifacts[i]))
