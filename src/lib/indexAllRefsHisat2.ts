@@ -36,7 +36,8 @@ export class IndexAllRefsHisat2 extends Task<undefined,undefined>
 
     public run() : Promise<boolean>
     {
-        return new Promise<boolean>((resolve) => {
+        return new Promise<boolean>((resolve) => 
+        {
             cp.execSync(this.execStrings[0],{stdio:"ignore"});
             resolve(true);
         });

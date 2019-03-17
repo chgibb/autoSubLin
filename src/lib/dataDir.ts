@@ -25,7 +25,8 @@ export class DataDir extends Task<undefined,undefined>
 
     public run() : Promise<boolean>
     {
-        return new Promise<boolean>((resolve) => {
+        return new Promise<boolean>((resolve) => 
+        {
             resolve(true);
         });
     }

@@ -28,7 +28,8 @@ export class Dir extends Task<string,undefined>
 
     public run() : Promise<boolean>
     {
-        return new Promise<boolean>((resolve) => {
+        return new Promise<boolean>((resolve) => 
+        {
             fs.mkdirSync(this.input);
             resolve(true);
         });

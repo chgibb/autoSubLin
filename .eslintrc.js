@@ -31,6 +31,14 @@ module.exports = {
             "error",
             "always"
         ],
-        "no-console": "off"
+        "no-console": "off",
+        "brace-style": [
+            "error",
+            "allman"
+        ],
+        "object-curly-spacing": [
+            "error",
+            "never"
+        ]
     }
 };

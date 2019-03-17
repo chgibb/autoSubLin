@@ -4,21 +4,21 @@ import {Task} from "./task";
 import {BamSorted} from "./bamSorted";
 import {BamToSam} from "./bamToSam";
 
-export class BamToFastq extends Task<string,Array<string>>
+export class BamToFastqUnpaired extends Task<string,string>
 {
     public name : string;
     public execStrings : Array<string>;
     
-    public constructor(input : string,modifiers : Array<string>)
+    public constructor(input : string,modifiers : string)
     {
         super(input,modifiers);
-        this.name = `Sam to Fastq out/raw/${this.input}.sorted.sam -> ${this.modifiers[0]}, ${this.modifiers[1]}`;
+        this.name = `Sam to Fastq out/raw/${this.input}.sorted.sam -> ${this.modifiers}`;
         this.dependsOn = [
             new BamToSam(input,`out/raw/${input}.sam`),
             new BamSorted(input,`out/raw/${input}.sorted.bam`),
         ];
         this.execStrings = [
-            `tools/bedtools2/bedtools bamtofastq -i out/raw/${this.input}.sorted.bam -fq ${this.modifiers[0]} -fq2 ${this.modifiers[1]}`
+            `tools/bedtools2/bedtools bamtofastq -i out/raw/${this.input}.sorted.bam -fq ${this.modifiers}`
         ];
     }
 
@@ -26,8 +26,7 @@ export class BamToFastq extends Task<string,Array<string>>
     {
         let res = new Array<string>();
 
-        res.push(this.modifiers[0]);
-        res.push(this.modifiers[1]);
+        res.push(this.modifiers);
 
         return res;
     }
