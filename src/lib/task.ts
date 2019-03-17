@@ -4,6 +4,7 @@ export abstract class Task<I,M>
 {
     public dependsOn? : Array<Task<any,any>>;
     public abstract name : string;
+    public abstract execStrings : Array<string>;
     public input : I;
     public modifiers : M;
 
@@ -30,8 +31,13 @@ export abstract class Task<I,M>
             
             if(missingArtifacts(this))
             {
-                if(this.artifacts().length != 0)
-                    console.log(this.name);
+                //if(this.artifacts().length != 0)
+                //   console.log(this.name);
+                for(let i = 0; i != this.execStrings.length; ++i)
+                {
+                    console.log(this.execStrings[i]);
+                }
+
                 await this.run();
             }
             resolve(missingArtifacts(this));

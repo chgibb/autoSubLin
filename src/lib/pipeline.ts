@@ -1,12 +1,12 @@
 import {Task} from "./task";
 
-import { BamToSam } from "./bamToSam";
-import { BamSorted } from "./bamSorted";
-import { DataDir } from "./dataDir";
+import {BamToFastq} from "./bamToFastq";
+import {DataDir} from "./dataDir";
 
 export class Pipeline extends Task<string,undefined>
 {
     public name : string;
+    public execStrings : Array<string> = [];
 
     public constructor(input : string)
     {
@@ -15,8 +15,7 @@ export class Pipeline extends Task<string,undefined>
         this.name = `Pipelining ${input}`;
         this.dependsOn = [
             new DataDir(),
-            new BamToSam(input,`out/raw/${input}.sam`),
-            new BamSorted(input,`out/raw/${input}.sorted.sam`)
+            new BamToFastq(input,[`out/raw/${input}_read1.fq`,`out/raw/${input}_read2.fq`])
         ];
     }
 

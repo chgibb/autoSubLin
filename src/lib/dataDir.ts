@@ -4,6 +4,7 @@ import {Dir} from "./dir";
 export class DataDir extends Task<undefined,undefined>
 {
     public name : string;
+    public execStrings : Array<string> = [];
     
     public constructor()
     {

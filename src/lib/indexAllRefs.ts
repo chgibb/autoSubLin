@@ -6,12 +6,16 @@ import {DataDir} from "./dataDir";
 export class IndexAllRefsHisat2 extends Task<undefined,undefined>
 {
     public name : string;
+    public execStrings : Array<string>;
 
     public constructor()
     {
         super(undefined,undefined);
         this.name = "Index Hisat2 all refs fasta";
         this.dependsOn = [new DataDir()];
+        this.execStrings = [
+            "./tools/hisat2-build tools/HPV16_all_refs.fasta out/raw/HPV16_all_refs"
+        ];
     }
 
     public artifacts() : Array<string>
@@ -33,7 +37,7 @@ export class IndexAllRefsHisat2 extends Task<undefined,undefined>
     public run() : Promise<boolean>
     {
         return new Promise<boolean>((resolve) => {
-            cp.execSync("./tools/hisat2-build tools/HPV16_all_refs.fasta out/raw/HPV16_all_refs",{stdio:"ignore"});
+            cp.execSync(this.execStrings[0],{stdio:"ignore"});
             resolve(true);
         });
     }
