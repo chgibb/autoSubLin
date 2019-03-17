@@ -1,4 +1,4 @@
-import * as fs from "fs"
+import * as fs from "fs";
 
 import {Task} from "./task";
 
@@ -26,6 +26,6 @@ export class Dir extends Task<string,undefined>
         return new Promise<boolean>((resolve) => {
             fs.mkdirSync(this.input);
             resolve(true);
-        })
+        });
     }
 }

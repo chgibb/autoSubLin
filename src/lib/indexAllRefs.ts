@@ -33,7 +33,7 @@ export class IndexAllRefsHisat2 extends Task<undefined,undefined>
     public run() : Promise<boolean>
     {
         return new Promise<boolean>((resolve) => {
-            cp.execSync(`./tools/hisat2-build tools/HPV16_all_refs.fasta out/raw/HPV16_all_refs`,{stdio:"ignore"});
+            cp.execSync("./tools/hisat2-build tools/HPV16_all_refs.fasta out/raw/HPV16_all_refs",{stdio:"ignore"});
             resolve(true);
         });
     }

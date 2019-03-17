@@ -19,7 +19,7 @@ export abstract class Task<I,M>
     
     public execute() : Promise<boolean>
     {
-        return new Promise<boolean>(async (resolve : (value : boolean) => void,reject : (reason : string) => void) => {
+        return new Promise<boolean>(async (resolve : (value : boolean) => void) => {
             if(this.dependsOn)
             {
                 for(let i = 0; i != this.dependsOn.length; ++i)

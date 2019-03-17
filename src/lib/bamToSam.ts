@@ -29,6 +29,6 @@ export class BamToSam extends Task<string,string>
         return new Promise<boolean>((resolve) => {
             cp.execSync(`./tools/samtools view -@ 4 -h -o ${this.modifiers} ${this.input}`,{stdio:"ignore"});
             resolve(true);
-        })
+        });
     }
 }

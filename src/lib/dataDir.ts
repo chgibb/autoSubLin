@@ -1,5 +1,3 @@
-import * as fs from "fs"
-
 import {Task} from "./task";
 import {Dir} from "./dir";
 
@@ -10,7 +8,7 @@ export class DataDir extends Task<undefined,undefined>
     public constructor()
     {
         super(undefined,undefined);
-        this.name = `Make data dir/`;
+        this.name = "Make data dir/";
         this.dependsOn = [
             new Dir("out"),
             new Dir("out/raw")
