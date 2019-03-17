@@ -1,0 +1,3 @@
+[submodule "src/vendor/compile-time-regular-expressions"]
+	path = src/vendor/compile-time-regular-expressions
+	url = https://github.com/hanickadot/compile-time-regular-expressions
