@@ -68,3 +68,5 @@ out
 *.bam
 .ninja_deps
 .ninja_log
+reporter
+*.o
