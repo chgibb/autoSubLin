@@ -1,6 +1,5 @@
-import * as cp from "child_process";
-
 import {Task} from "./task";
+import {processSam} from "./reports/processSam";
 
 export class GenerateReports extends Task<string,undefined>
 {
@@ -13,7 +12,7 @@ export class GenerateReports extends Task<string,undefined>
         this.name = "Generate reports";
         this.dependsOn = [];
         this.execStrings = [
-            `./reporter ${input}`
+            `report on ${input}`
         ];
     }
 
@@ -30,7 +29,8 @@ export class GenerateReports extends Task<string,undefined>
     {
         return new Promise<boolean>((resolve) => 
         {
-            cp.execSync(this.execStrings[0],{stdio:"ignore"});
+            processSam(this.input);
+            //cp.execSync(this.execStrings[0],{stdio:"ignore"});
             resolve(true);
         });
     }
