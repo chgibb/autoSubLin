@@ -4,7 +4,7 @@ import {Task} from "./task";
 
 import {IndexAllRefsBowtie2} from "./indexAllRefsBowtie2";
 
-export class Bowtie22AllSubLinAlignUnpaired extends Task<string,string>
+export class Bowtie2AllSubLinAlignUnpaired extends Task<string,string>
 {
     public name : string;
     public execStrings : Array<string> = [];
