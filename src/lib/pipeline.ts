@@ -27,8 +27,13 @@ export class Pipeline extends Task<string,undefined>
             new Hisat2AllSubLinAlignUnpaired(`out/raw/${input}_readUnpaired.fq`,`out/raw/${input}.allsublinaln.unpaired.sam`),
             new Bowtie2AllSubLinAlign([`out/raw/${input}_read1.fq`,`out/raw/${input}_read2.fq`],`out/raw/${input}.allsublinaln.bowtie2.sam`),
             new Bowtie22AllSubLinAlignUnpaired(`out/raw/${input}_readUnpaired.fq`,`out/raw/${input}.allsublinaln.unpaired.bowtie2.sam`),
+        ];
 
-            new GenerateReports(`out/raw/${input}.allsublinaln.sam`)
+        this.results = [
+            new GenerateReports(`out/raw/${input}.allsublinaln.sam`),
+            new GenerateReports(`out/raw/${input}.allsublinaln.unpaired.sam`),
+            new GenerateReports(`out/raw/${input}.allsublinaln.bowtie2.sam`),
+            new GenerateReports(`out/raw/${input}.allsublinaln.unpaired.bowtie2.sam`)
         ];
     }
 
