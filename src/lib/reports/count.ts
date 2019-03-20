@@ -5,7 +5,7 @@ import {Report} from "./report";
 export class Count extends Report
 {
     public tally : number = 0;
-    public process(line : string) : void
+    public process() : void
     {
         this.tally++;
     }

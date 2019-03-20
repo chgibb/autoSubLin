@@ -39,6 +39,7 @@ module.exports = {
         "object-curly-spacing": [
             "error",
             "never"
-        ]
+        ],
+        "no-unused-vars": "off"
     }
 };

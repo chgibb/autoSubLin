@@ -2,6 +2,7 @@
     "files.exclude": {
         "src/*.js": true,
         "src/lib/*.js": true,
+        "src/lib/reports/*.js": true,
         "autoSubLin/*.js": true
     }
 }

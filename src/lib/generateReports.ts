@@ -21,6 +21,7 @@ export class GenerateReports extends Task<string,undefined>
         let res = new Array<string>();
 
         res.push(`${this.input}.readCount`);
+        res.push(`${this.input}.A1`);
 
         return res;
     }

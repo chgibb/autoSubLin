@@ -1,8 +1,4 @@
-./node_modules/.bin/eslint src/*.ts
-if [[ $? != 0 ]]; then
-    exit 1
-fi
-./node_modules/.bin/eslint src/lib/*.ts
+./node_modules/.bin/eslint $(find src -name *.ts)
 if [[ $? != 0 ]]; then
     exit 1
 fi
