@@ -70,3 +70,6 @@ out
 .ninja_log
 reporter
 *.o
+scripts/*.js
+*.js
+samples.json

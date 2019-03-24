@@ -7,3 +7,7 @@ fi
 if [[ $? != 0 ]]; then
     exit 1
 fi
+
+node scripts/rollup src/index.js tmp.js
+./node_modules/.bin/browserify tmp.js --node -o dist.js
+rm tmp.js

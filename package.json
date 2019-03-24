@@ -6,15 +6,19 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "bash scripts/build.bash",
-    "fix" : "bash scripts/fix.bash"
+    "fix": "bash scripts/fix.bash"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^10.12.10",
     "@typescript-eslint/parser": "^1.4.2",
-    "chalk": "^2.4.1",
+    "browserify": "^16.2.3",
+    "chalk": "^2.4.2",
     "eslint": "^5.15.2",
+    "rollup": "^1.7.2",
+    "rollup-plugin-commonjs": "^9.2.1",
+    "rollup-plugin-node-resolve": "^4.0.1",
     "typescript": "^3.1.6"
   }
 }

@@ -32,7 +32,10 @@ export abstract class Task<I,M>
                 }
             }
             prune(this);
-            resolve(true);
+            setImmediate(() =>
+            {
+                return resolve(true);
+            });
         });
     }
 

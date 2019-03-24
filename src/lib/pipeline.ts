@@ -1,3 +1,7 @@
+import * as fs from "fs";
+
+const chalk = require("chalk");
+
 import {Task} from "./task";
 
 import {BamToFastq} from "./bamToFastq";
@@ -35,6 +39,124 @@ export class Pipeline extends Task<string,undefined>
             new GenerateReports(`out/raw/${input}.allsublinaln.bowtie2.sam`),
             new GenerateReports(`out/raw/${input}.allsublinaln.unpaired.bowtie2.sam`)
         ];
+    }
+
+    public showReport(file : string) : boolean
+    {
+        const count = parseInt(fs.readFileSync(`${file}.readCount`).toString());
+
+        let sublinResults : Array<{subLin : string,count : number}> = new Array();
+
+        sublinResults.push({
+            subLin : "A1",
+            count : parseInt(fs.readFileSync(`${file}.A1`).toString())
+        });
+
+        sublinResults.push({
+            subLin : "A2",
+            count : parseInt(fs.readFileSync(`${file}.A2`).toString())
+        });
+
+        sublinResults.push({
+            subLin : "A3",
+            count : parseInt(fs.readFileSync(`${file}.A3`).toString())
+        });
+
+        sublinResults.push({
+            subLin : "A4",
+            count : parseInt(fs.readFileSync(`${file}.A4`).toString())
+        });
+
+        sublinResults.push({
+            subLin : "B1",
+            count : parseInt(fs.readFileSync(`${file}.B1`).toString())
+        });
+
+        sublinResults.push({
+            subLin : "B2",
+            count : parseInt(fs.readFileSync(`${file}.B2`).toString())
+        });
+
+        sublinResults.push({
+            subLin : "B3",
+            count : parseInt(fs.readFileSync(`${file}.B3`).toString())
+        });
+
+        sublinResults.push({
+            subLin : "B4",
+            count : parseInt(fs.readFileSync(`${file}.B4`).toString())
+        });
+
+        sublinResults.push({
+            subLin : "C1",
+            count : parseInt(fs.readFileSync(`${file}.C1`).toString())
+        });
+
+        sublinResults.push({
+            subLin : "C2",
+            count : parseInt(fs.readFileSync(`${file}.C2`).toString())
+        });
+
+        sublinResults.push({
+            subLin : "C3",
+            count : parseInt(fs.readFileSync(`${file}.C3`).toString())
+        });
+
+        sublinResults.push({
+            subLin : "C4",
+            count : parseInt(fs.readFileSync(`${file}.C4`).toString())
+        });
+
+        sublinResults.push({
+            subLin : "D1",
+            count : parseInt(fs.readFileSync(`${file}.D1`).toString())
+        });
+
+        sublinResults.push({
+            subLin : "D2",
+            count : parseInt(fs.readFileSync(`${file}.D2`).toString())
+        });
+
+        sublinResults.push({
+            subLin : "D3",
+            count : parseInt(fs.readFileSync(`${file}.D3`).toString())
+        });
+
+        sublinResults.push({
+            subLin : "D4",
+            count : parseInt(fs.readFileSync(`${file}.D4`).toString())
+        });
+        
+        console.log(`   Total: ${chalk.yellow(`${count}`)}`);
+
+        for(let i = 0; i!= sublinResults.length; ++i)
+        {
+            console.log(`       ${chalk.magenta(`HPV16 ${sublinResults[i].subLin}`)} ${chalk.blue(`${sublinResults[i].count}`)} -> ${chalk.green(`${(sublinResults[i].count/count)*100}%`)}`);
+        }
+
+        return true;
+    }
+
+    public showReports() : boolean
+    {
+        console.log(this.input);
+        console.log("Hisat2 Paired");
+        this.showReport(`out/raw/${this.input}.allsublinaln.sam`);
+        console.log();
+
+        console.log("Hisat2 Unpaired");
+        this.showReport(`out/raw/${this.input}.allsublinaln.unpaired.sam`);
+        console.log();
+
+        console.log("Bowtie2 Paired --sensitive-local");
+        this.showReport(`out/raw/${this.input}.allsublinaln.bowtie2.sam`);
+        console.log();
+
+        console.log("Bowtie2 Unpaired --sensitive-local");
+        this.showReport(`out/raw/${this.input}.allsublinaln.unpaired.bowtie2.sam`);
+        console.log();
+
+        return true;
     }
 
     public artifacts() : Array<string>
