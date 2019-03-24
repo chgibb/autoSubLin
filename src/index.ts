@@ -12,7 +12,7 @@ const samples = JSON.parse(fs.readFileSync(args[0]).toString()) as Array<string>
     {
         let pipeline = new Pipeline(samples[i]);
         await pipeline.execute();
-        await pipeline.prune();
         pipeline.showReports();
+        await pipeline.prune();
     }
 })();
