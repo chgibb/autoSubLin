@@ -44,9 +44,9 @@ export class GenerateReports extends Task<string,undefined>
 
     public run() : Promise<boolean>
     {
-        return new Promise<boolean>((resolve) => 
+        return new Promise<boolean>(async (resolve) => 
         {
-            processSam(this.input);
+            await processSam(this.input);
             //cp.execSync(this.execStrings[0],{stdio:"ignore"});
             resolve(true);
         });
