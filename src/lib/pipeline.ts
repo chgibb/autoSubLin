@@ -11,6 +11,8 @@ import {Hisat2AllSubLinAlign} from "./hisat2AllSubLin";
 import {Hisat2AllSubLinAlignUnpaired} from "./hisat2AllSubLinUnpaired";
 import {Bowtie2AllSubLinAlignUnpaired} from "./bowtie2AllSubLinUnpaired";
 import {Bowtie2AllSubLinAlign} from "./bowtie2AllSubLin";
+import {Bowtie2AllSubLinAlignUnpairedVSL} from "./bowtie2AllSubLinUnpairedVSL";
+import {Bowtie2AllSubLinAlignVSL} from "./bowtie2AllSubLinVSL";
 import {GenerateReports} from "./generateReports";
 
 export class Pipeline extends Task<string,undefined>
@@ -27,17 +29,26 @@ export class Pipeline extends Task<string,undefined>
             new DataDir(),
             new BamToFastq(input,[`out/raw/${input}_read1.fq`,`out/raw/${input}_read2.fq`]),
             new BamToFastqUnpaired(input,`out/raw/${input}_readUnpaired.fq`),
+
             new Hisat2AllSubLinAlign([`out/raw/${input}_read1.fq`,`out/raw/${input}_read2.fq`],`out/raw/${input}.allsublinaln.sam`),
             new Hisat2AllSubLinAlignUnpaired(`out/raw/${input}_readUnpaired.fq`,`out/raw/${input}.allsublinaln.unpaired.sam`),
+
             new Bowtie2AllSubLinAlign([`out/raw/${input}_read1.fq`,`out/raw/${input}_read2.fq`],`out/raw/${input}.allsublinaln.bowtie2.sam`),
             new Bowtie2AllSubLinAlignUnpaired(`out/raw/${input}_readUnpaired.fq`,`out/raw/${input}.allsublinaln.unpaired.bowtie2.sam`),
+
+            new Bowtie2AllSubLinAlignVSL([`out/raw/${input}_read1.fq`,`out/raw/${input}_read2.fq`],`out/raw/${input}.allsublinalnvsl.bowtie2.sam`),
+            new Bowtie2AllSubLinAlignUnpairedVSL(`out/raw/${input}_readUnpaired.fq`,`out/raw/${input}.allsublinaln.unpairedvsl.bowtie2.sam`),
         ];
 
         this.results = [
             new GenerateReports(`out/raw/${input}.allsublinaln.sam`),
             new GenerateReports(`out/raw/${input}.allsublinaln.unpaired.sam`),
+
             new GenerateReports(`out/raw/${input}.allsublinaln.bowtie2.sam`),
-            new GenerateReports(`out/raw/${input}.allsublinaln.unpaired.bowtie2.sam`)
+            new GenerateReports(`out/raw/${input}.allsublinaln.unpaired.bowtie2.sam`),
+
+            new GenerateReports(`out/raw/${input}.allsublinalnvsl.bowtie2.sam`),
+            new GenerateReports(`out/raw/${input}.allsublinaln.unpairedvsl.bowtie2.sam`),
         ];
     }
 
@@ -154,6 +165,14 @@ export class Pipeline extends Task<string,undefined>
 
         console.log("Bowtie2 Unpaired --sensitive-local");
         this.showReport(`out/raw/${this.input}.allsublinaln.unpaired.bowtie2.sam`);
+        console.log();
+
+        console.log("Bowtie2 Paired --very-sensitive-local");
+        this.showReport(`out/raw/${this.input}.allsublinalnvsl.bowtie2.sam`);
+        console.log();
+
+        console.log("Bowtie2 Unpaired --very-sensitive-local");
+        this.showReport(`out/raw/${this.input}.allsublinaln.unpairedvsl.bowtie2.sam`);
         console.log();
 
         return true;
